@@ -29,6 +29,7 @@
             <tbody>
             <th:block th:each="user : ${listUsers}">
                 <tr>
+                    <td>[[${user.id}]]</td>
                     <td>[[${user.name}]]</td>
                     <td>[[${user.age}]]</td>
                     <td>

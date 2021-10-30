@@ -1,19 +1,18 @@
 package com.peaksoft.dao;
 
 import com.peaksoft.model.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-public class UserDaoImpl implements UserDao{
+public class UserDaoImpl implements UserDao {
 
     @PersistenceContext
 //    @Qualifier
-    private  EntityManager entityManager;
+    private EntityManager entityManager;
 
 
     @Override
@@ -22,18 +21,18 @@ public class UserDaoImpl implements UserDao{
     }
 
     @Override
-    public List<User> getAll() {
-        return entityManager.createQuery("select u from User u", User.class ).getResultList();
+    public List<User> getAllUser() {
+        return entityManager.createQuery("select u from User u", User.class).getResultList();
     }
 
     @Override
-    public User get(int id) {
+    public User getById(int id) {
         return (User) entityManager.find(User.class, id);
     }
 
     @Override
-    public void delete(Integer id) {
-        entityManager.remove(get(id));
+    public void deleteUserById(Integer id) {
+        entityManager.remove(getById(id));
     }
 
     @Override

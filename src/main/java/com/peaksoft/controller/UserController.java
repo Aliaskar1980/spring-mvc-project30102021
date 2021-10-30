@@ -5,13 +5,11 @@ import com.peaksoft.model.User;
 import com.peaksoft.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -27,7 +25,7 @@ public class UserController {
     @GetMapping
     //localhost:1000/users
     public String showUserList(Model model) {
-        List<User> listUsers = userService.getAll();
+        List<User> listUsers = userService.getAllUser();
         model.addAttribute("listUsers", listUsers);
         return "users";
     }
@@ -46,7 +44,7 @@ public class UserController {
 
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable("id") Integer id, Model model) {
-        User user = userService.get(id);
+        User user = userService.getById(id);
         model.addAttribute("user", user);
         return "user_form";
     }
@@ -59,7 +57,7 @@ public class UserController {
 
     @GetMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") Integer id) {
-        userService.delete(id);
+        userService.deleteById(id);
         return "redirect:/users";
     }
 }
